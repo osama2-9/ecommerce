@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+.navbar-color {
+    background-color: #172339 !important;
+}
+
+.navbar-color i {
+    color: #FFF;
+}
+
+.navbar-color a {
+    color: #FFF;
+}
+
+.formdiv {
+    position: absolute;
+    top: 200px;
+    left: 44%;
+    width: 600px;
+    height: 400px;
+    padding: 20px;
+
+}
+
+.formdiv form {
+    position: absolute;
+    top: 130px;
+    left: 100px;
+}
+
+.formdiv input {
+    width: 300px;
+}
+
+.formdiv button {
+    margin-top: 50px;
+}

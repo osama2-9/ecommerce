@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+.navbar-color {
+    background-color: #172339 !important;
+}
+
+.navbar-color i {
+    color: #FFF;
+}
+
+.navbar-color a {
+    color: #FFF;
+}
+
+.producttable {
+    position: absolute;
+    top: 80px;
+    left: 17%;
+    width: 82%;
+}
+
+.btn-danger {
+    position: relative;
+    top: -31px;
+    left: 70px;
+
+}

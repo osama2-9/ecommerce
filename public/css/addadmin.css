@@ -1,0 +1,73 @@
+.navbar-color {
+    background-color: #172339 !important;
+}
+
+.navbar-color i {
+    color: #FFF;
+}
+
+.navbar-color a {
+    color: #FFF;
+}
+
+.contant {
+
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 34%;
+    top: 15%;
+    background-color: #ffffff;
+    width: 800px;
+    height: 550px;
+    box-shadow: 1px 1px 10px 5px #ddd;
+    align-items: center;
+    padding: 10px;
+}
+
+.form-control {
+    width: 300px;
+}
+
+.contant input {
+    width: 220px;
+}
+
+.contant input[type='radio'] {
+    width: 15px;
+    position: absolute;
+    top: -50px;
+}
+
+.cheaks {
+    display: flex;
+    position: relative;
+    left: 10%;
+    top: 121px;
+    width: 300px;
+}
+
+.cheaks label {
+    position: relative;
+    top: -70px;
+    right: 2px;
+}
+
+.form button {
+    width: 100px;
+    background-color: rgb(20, 19, 19);
+    opacity: .9;
+    margin-top: 1rem;
+
+}
+
+
+
+.form label {
+    margin-top: 20px;
+}
+
+.form i {
+    font-size: 3rem;
+    text-align: center;
+}

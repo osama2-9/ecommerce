@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+.navbar-color {
+    background-color: #172339 !important;
+}
+
+.navbar-color i {
+    color: #FFF;
+}
+
+.navbar-color a {
+    color: #FFF;
+}
+
+.product {
+    position: absolute !important;
+    top: 80px !important;
+    left: 18%;
+    width: 80%;
+    border-radius: 1rem;
+}
+
+.product form {
+    padding: 10px;
+}
+
+.product form button {
+    width: 120px;
+}
+
+.heig {
+    height: 890px !important;
+}

@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
+.navbar-color {
+    background-color: #172339 !important;
+}
+
+.navbar-color i {
+    color: #FFF;
+}
+
+.navbar-color a {
+    color: #FFF;
+}
+
+.utable {
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    width: 800px;
+
+
+}

@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+}
+
+.navbar-color {
+    background-color: #172339 !important;
+}
+
+.navbar-color i {
+    color: #FFF;
+}
+
+.navbar-color a {
+    color: #FFF;
+}
+
+.adminstable {
+    position: absolute;
+    top: 55%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+
+}
+
+.adminstable table {
+    width: 700px;
+
+}
+
+.icons {
+    display: flex;
+}
+
+.icons a {
+    margin-left: 5px;
+}
+
+.StoreStatisctic {
+    background-color: #490da8;
+    opacity: .8;
+    position: absolute;
+    left: 15.7rem;
+    width: 83.4%;
+    height: 200px;
+    top: 55px;
+}
+
+.StoreStatisctic h1 {
+    color: white;
+}
+
+.allcards {
+    position: absolute;
+    top: 100px;
+
+}
+
+
+.allcards ul {
+    display: flex;
+    list-style: none;
+
+}
+
+.allcards ul li {
+    margin-left: 30px;
+}
+
+.card {
+
+    width: 210px;
+    height: 150px;
+    padding: 20px;
+}
+
+.card p {
+    font-size: 27px;
+    font-weight: 600;
+
+}
+
+.card span {
+    position: absolute;
+    left: 75%;
+    top: 10px;
+    font-size: 35px;
+
+
+
+}
+
+.card span i {
+
+    color: #000;
+    padding: 5px;
+    border-radius: 5px;
+
+}
+
+.lastorder {
+    position: absolute;
+    top: 47%;
+    left: 300px;
+}
+
+.lastorder table {
+    position: relative;
+    top: 20px;
+}

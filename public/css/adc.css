@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+.navbar-color {
+    background-color: #172339 !important;
+}
+
+.navbar-color i {
+    color: #FFF;
+}
+
+.navbar-color a {
+    color: #FFF;
+}
+
+.cdata {
+    position: absolute;
+    top: 100px;
+    left: 18%;
+    width: 80%;
+}
