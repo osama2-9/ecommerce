@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "views/(.*)",
-      "dest": "views/index.ejs"
+      "dest": "views/"
     }
   ]
 }
