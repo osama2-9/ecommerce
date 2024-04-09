@@ -20,20 +20,6 @@ const userController = require("./controllers/userController");
 const storeController = require("./controllers/storeController");
 const superAdminController = require("./controllers/superAdminConrtoller");
 
-const store = new mongoSession({
-  uri: "mongodb+srv://osamasrraj:Osama671010@cluster.zx3e9n6.mongodb.net/?retryWrites=true&w=majority",
-  collection: "Session",
-});
-
-app.use(
-  session({
-    secret: "secret key",
-    resave: false,
-    saveUninitialized: false,
-    store: store,
-  })
-);
-
 app.use("/", storeController);
 app.use("/", adminController);
 app.use("/", productController);
