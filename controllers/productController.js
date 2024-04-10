@@ -4,11 +4,13 @@ const product = require("../models/product");
 const category = require("../models/category");
 const uploads = require("../uploads");
 router.use(express.json());
-
+const methodOverride = require("method-override");
+router.use(methodOverride("_method"));
 router.get("/addproducts", async (req, res) => {
   try {
+    const token = req.cookies.lcfa;
     const categorys = await category.find();
-    res.render("admin/addproducts", { category: categorys });
+    res.render(`admin/addproducts`, { category: categorys, AT: token });
   } catch (err) {
     console.log(err);
   }
@@ -16,6 +18,7 @@ router.get("/addproducts", async (req, res) => {
 
 router.post("/addproduct", uploads.array("images", 5), async (req, res) => {
   try {
+    const token = req.cookies.lcfa;
     const {
       productName,
       quantity,
@@ -46,7 +49,7 @@ router.post("/addproduct", uploads.array("images", 5), async (req, res) => {
     });
 
     if (newProduct) {
-      res.redirect("adminDashbord");
+      res.redirect(`adminDashbord?token=${token}`);
     } else {
       res.status(500).send("Failed to add product");
     }
@@ -57,9 +60,9 @@ router.post("/addproduct", uploads.array("images", 5), async (req, res) => {
 });
 router.get("/showproducts", async (req, res) => {
   try {
+    const token = req.cookies.lcfa;
     const perPage = 7;
     const page = req.query.page || 1;
-   
 
     const allProducts = await product
       .find()
@@ -67,12 +70,13 @@ router.get("/showproducts", async (req, res) => {
       .limit(perPage);
 
     const totalProducts = await product.countDocuments();
-
-    res.render("admin/showproduct", {
+    const allCategory = await category.find();
+    res.render(`admin/showproduct`, {
       PRODUCT: allProducts,
       currentPage: page,
       totalPages: Math.ceil(totalProducts / perPage),
-      
+      AT: token,
+      category: allCategory,
     });
   } catch (err) {
     console.log(err);
@@ -81,54 +85,61 @@ router.get("/showproducts", async (req, res) => {
 });
 router.get("/editproduct/:PID", async (req, res) => {
   try {
+    const token = req.cookies.lcfa;
     const PID = req.params.PID;
     const editproducData = await product.findById({ _id: PID }, req.body);
     const allCategory = await category.find();
     if (editproducData) {
-      res.render("admin/editproduct", {
+      res.render(`admin/editproduct`, {
         PTU: editproducData,
         category: allCategory,
+        AT: token,
       });
     }
   } catch (err) {
     console.log(err);
   }
 });
-router.put("/product/:PID", async (req, res) => {
+router.put("/productUpdate/:productId", async (req, res) => {
+  const productId = req.params.productId;
+  const updates = req.body;
+
   try {
-    const data = req.body;
-    const PID = req.params.PID;
-    console.log(data);
-    const updateProduct = await product.updateOne({ _id: PID }, data);
+    const updatedProduct = await product.findByIdAndUpdate(productId, updates, {
+      new: true,
+    });
 
-    if (updateProduct) {
-      console.log(data);
-
-      res.redirect("/showproducts");
-    } else {
-      res.status(404).send("Product not found");
+    if (!updatedProduct) {
+      return res.status(404).json({ error: "Product not found" });
     }
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Internal Server Error");
+
+    res.json(updates);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
 router.delete("/deleteproduct/:productID", async (req, res) => {
+  const token = req.cookies.lcfa;
   const productID = req.params.productID;
   const ifDelete = await product.deleteOne({ _id: productID });
   if (ifDelete) {
-    res.redirect("/showproducts");
+    res.redirect(`/showproducts?token=${token}`);
   } else {
-    res.redirect("/showproducts");
+    res.redirect(`/showproducts?token=${token}`);
   }
 });
 
 router.get("/showFullProduct/:PID", async (req, res) => {
+  const token = req.cookies.lcfa;
   const PID = req.params.PID;
   const Pdata = await product.findById({ _id: PID });
   if (Pdata) {
-    res.render("admin/showFullProduct", { PD: Pdata });
+    res.render(`admin/showFullProduct`, {
+      PD: Pdata,
+      AT: token,
+    });
   }
 });
 module.exports = router;

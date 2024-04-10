@@ -52,58 +52,62 @@
               id="menu"
             >
               <li class="nav-item">
-                <a href="/adminDashbord" class="nav-link align-middle px-0">
+                <a href="/adminDashbord?token=<%= AT %>" class="nav-link align-middle px-0">
                   <i class="fs-4 bi-house"></i>
                   <span class="ms-1 d-none d-sm-inline">Home</span>
                 </a>
               </li>
 
               <li>
-                <a href="/orders" class="nav-link px-0 align-middle">
+                <a href="/orders?token=<%= AT %>" class="nav-link px-0 align-middle">
                   <i class="fs-4 bi-table"></i>
                   <span class="ms-1 d-none d-sm-inline">Orders</span></a
                 >
               </li>
 
               <li>
-                <a href="/addproducts" class="nav-link px-0 align-middle">
+                <a href="/addproducts?token=<%= AT %>" class="nav-link px-0 align-middle">
                   <i class="fs-4 bi-grid"></i>
                   <span class="ms-1 d-none d-sm-inline">Add Products</span>
                 </a>
               </li>
 
               <li>
-                <a href="/showproducts" class="nav-link px-0 align-middle">
+                <a href="/showproducts?token=<%= AT %>" class="nav-link px-0 align-middle">
                   <i class="fs-4 bi-grid"></i>
                   <span class="ms-1 d-none d-sm-inline">Show Products</span>
                 </a>
               </li>
               <li></li>
               <li>
-                <a href="/addcategory" class="nav-link px-0 align-middle">
+                <a href="/addcategory?token=<%= AT %>" class="nav-link px-0 align-middle">
                   <i class="fs-4 bi-tag"></i>
                   <span class="ms-1 d-none d-sm-inline">Add Category</span>
                 </a>
               </li>
 
               <li>
-                <a href="/showcategory" class="nav-link px-0 align-middle">
+                <a href="/showcategory?token=<%= AT %>" class="nav-link px-0 align-middle">
                   <i class="fs-4 bi-tag"></i>
                   <span class="ms-1 d-none d-sm-inline">Show Category</span>
                 </a>
               </li>
               <li>
-                <a href="/customers" class="nav-link px-0 align-middle">
+                <a href="/customers?token=<%= AT %>" class="nav-link px-0 align-middle">
                   <i class="fs-4 bi-people"></i>
                   <span class="ms-1 d-none d-sm-inline">Customers</span>
                 </a>
               </li>
-              <li>
-                <a href="/addadmin" class="nav-link px-0 align-middle">
+               <li>
+                <a
+                  href="/addadmin?token=<%= AT %>"
+                  class="nav-link px-0 align-middle"
+                >
                   <i class="fs-4 bi-people"></i>
                   <span class="ms-1 d-none d-sm-inline">Add Admin</span>
                 </a>
               </li>
+              
             </ul>
             <hr />
             <div class="dropdown pb-4">
@@ -140,6 +144,34 @@
       </div>
     </div>
     <div class="cdata">
+      <div class="pagination justify-content-center">
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      <% if (currentPage > 1) { %>
+        <li class="page-item">
+          <a class="page-link" href="/customers?page=<%= currentPage - 1 %>&token=<%= AT %>" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      <% } %>
+
+      <% for (let i = 1; i <= totalPages; i++) { %>
+        <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+          <a class="page-link" href="/customers?page=<%= i %>&token=<%= AT %>"><%= i %></a>
+        </li>
+      <% } %>
+
+      <% if (currentPage < totalPages) { %>
+        <li class="page-item">
+          <a class="page-link" href="/customers?page=<%= currentPage + 1 %>&token=<%= AT %>" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      <% } %>
+    </ul>
+  </nav>
+</div>
+
       <table class="table table-bordered text-center">
         <thead>
           <tr>

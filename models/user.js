@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
     password: String,
     email: String,
     phone: Number,
-    paymentMethod: String,
+    paymentMethod: [String],
     image: String,
     spent: { type: Number, default: 0 },
   },

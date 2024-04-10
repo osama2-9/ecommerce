@@ -52,23 +52,25 @@
               id="menu"
             >
               <li class="nav-item">
-                <a href="/userDashbord" class="nav-link align-middle px-0">
+                <a href="/userDashbord/<%= user._id %>" class="nav-link align-middle px-0">
                   <i class="fs-4 bi-house"></i>
                   <span class="ms-1 d-none d-sm-inline">Home</span>
                 </a>
               </li>
+             
 
-              <li>
-                <a href="/myorders" class="nav-link px-0 align-middle">
-                  <i class="fs-4 bi-table"></i>
-                  <span class="ms-1 d-none d-sm-inline">Orders</span></a
-                >
-              </li>
+             
               <li>
                 <a href="/userInfo/<%= user._id %>" class="nav-link px-0 align-middle">
                  <i class="bi bi-person-circle"></i>
-                  <span class="ms-1 d-none d-sm-inline">User Information</span></a
+                  <span class="ms-1 d-none d-sm-inline">Account</span></a
                 >
+              </li>
+               <li class="nav-item">
+                <a href="/index?token=<%= usertoken%>" class="nav-link align-middle px-0">
+                  <i class="fs-4 bi-house"></i>
+                  <span class="ms-1 d-none d-sm-inline">Store</span>
+                </a>
               </li>
             </ul>
             <hr />
@@ -93,8 +95,7 @@
                 class="dropdown-menu dropdown-menu-dark text-small shadow"
                 aria-labelledby="dropdownUser1"
               >
-                <li><a class="dropdown-item" href="/setting">Settings</a></li>
-                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                
                 <li>
                   <hr class="dropdown-divider" />
                 </li>
@@ -156,7 +157,7 @@
               <td><%= order.paymentMethod %></td>
               <td> <form
                     method="post"
-                    action="/deleteorder/<%= order._id %>"
+                    action="/deleteorder/<%= order._id %>/userId/<%= user._id %>?_method=DELETE"
                   >
                     <button class="btn btn-danger btn-sm " type="submit">
                       <i class="bi bi-trash"></i>

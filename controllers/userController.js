@@ -8,9 +8,10 @@ const categorys = require("../models/category");
 const User = require("../models/user");
 const order = require("../models/order");
 const methodOverride = require("method-override");
+const PRODUCT = require("../models/product");
 router.use(methodOverride("_method"));
 
-function verfiyToken(req, res, next) {
+function verfiyUserToken(req, res, next) {
   const token = req.query.token;
   if (!token) {
     return res.status(401).json({ err: "No Token found" });
@@ -33,14 +34,13 @@ router.get("/Register", (req, res) => {
 router.get("/userInfo/:UID", async (req, res) => {
   try {
     const userId = req.params.UID;
-
+    const userToken = req.cookies.userToken;
     const user = await User.findById(userId);
-
     if (!user) {
       return res.status(404).send("User not found");
     }
 
-    res.render("user/adduserinfo", { user: user });
+    res.render("user/adduserinfo", { user: user, usertoken: userToken });
   } catch (err) {}
 });
 
@@ -72,6 +72,7 @@ router.get("/login", (req, res) => {
 router.get("/userDashbord/:UID", async (req, res) => {
   try {
     const userId = req.params.UID;
+    const userToken = req.cookies.userToken;
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).send("User not found");
@@ -79,6 +80,7 @@ router.get("/userDashbord/:UID", async (req, res) => {
     const orderData = await order.find({ UID: userId });
     const countorder = await order.find({ UID: userId }).countDocuments();
     res.render("user/userDashbord", {
+      usertoken: userToken,
       user: user,
       order: orderData,
       count: countorder,
@@ -128,13 +130,17 @@ router.post("/userlogin", async (req, res) => {
     const passwordMatch = bcrypt.compare(password, userLogin.password);
     if (!passwordMatch) return res.status(401).send("Invalid Password");
     const token = jwt.sign({ userId: userLogin._id }, "O!$$6S!!m$$1010A67A23");
+    res.cookie("userToken", token, {
+      maxAge: 1000 * 60 * 60 * 24,
+      httpOnly: true,
+    });
     res.redirect(`/index?token=${token}`);
   } catch (error) {
     console.log(error);
   }
 });
 
-router.get("/index", verfiyToken, async (req, res) => {
+router.get("/index", verfiyUserToken, async (req, res) => {
   const user = await User.findById(req.userId);
   if (!user) {
     return res.status(404).send("User Not Found");
@@ -230,8 +236,6 @@ router.post("/order/:PID/userId/:userId", async (req, res) => {
       paymentMethod: user.paymentMethod,
     });
 
-    console.log(newOrder);
-
     const product = await Product.findById(req.params.PID);
     if (!product) {
       return res.status(404).send("Product Not Found");
@@ -254,6 +258,31 @@ router.post("/order/:PID/userId/:userId", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal Server Error");
+  }
+});
+
+router.delete("/deleteOrder/:OID/userId/:UID", async (req, res) => {
+  try {
+    const orderId = req.params.OID;
+    const userId = req.params.UID;
+    const findOrder = await order.findById(orderId);
+    const findUser = await User.findById(userId);
+    const findProduct = await PRODUCT.findById(findOrder.PID);
+    const orderPrice = Math.ceil(
+      parseInt(findOrder.price * findOrder.qauntity)
+    );
+    const tax = Math.ceil(parseInt(orderPrice * 0.05));
+    const refundAmount = Math.ceil(parseInt(findUser.spent - orderPrice - tax));
+    if (findOrder && findProduct && findUser) {
+      findUser.spent = refundAmount;
+      findProduct.quantity += findOrder.qauntity;
+      await findProduct.save();
+      await findUser.save();
+      await findOrder.deleteOne({ _id: orderId });
+    }
+    res.redirect(`/userDashbord/${userId}`);
+  } catch (error) {
+    console.log(error);
   }
 });
 
