@@ -79,9 +79,5 @@ router.get("/allproduct", async (req, res) => {
   }
 });
 
-// router.get("/cart", async (req, res) => {
-//   const user = await User.findById(req.params.userId);
-//   const totalOrders = await order.countDocuments({ UID: user._id });
-//   res.render("store/cart", { user: user, totalOrders: totalOrders });
-// });
+
 module.exports = router;

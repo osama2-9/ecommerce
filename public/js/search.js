@@ -1,22 +1,4 @@
-const searchInput = document.getElementById("searchInput");
-const searchorder = document.getElementById("search");
-searchInput.addEventListener("input", function () {
-  const searchTerm = searchInput.value.trim().toLowerCase();
-  const productRows = document.querySelectorAll(".producttable tbody tr");
 
-  productRows.forEach(function (row) {
-    const productName = row
-      .querySelector("td:nth-child(2)")
-      .textContent.trim()
-      .toLowerCase();
-
-    if (productName.includes(searchTerm)) {
-      row.style.display = "";
-    } else {
-      row.style.display = "none";
-    }
-  });
-});
 
 searchorder.addEventListener("input", function () {
   const searchTerm = searchInput.value.trim().toLowerCase();

@@ -1,11 +1,5 @@
 const mongoose = require("mongoose");
-mongoose
 
-  .connect(process.env.MONGO_URL)
-  .then()
-  .catch((err) => {
-    console.log(err);
-  });
 
 const adminSchema = new mongoose.Schema(
   {

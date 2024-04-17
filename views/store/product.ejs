@@ -82,32 +82,39 @@
             </svg>
           </p>
         </div>
+        <% if (user) { %>
         <ul class="navlist">
-          <a href="">
+          <a href="/allproduct/userId/<%= user._id %>">
+            <li>All Products</li>
+          </a>
+          <a href="/productfilter/men/userId/<%= user._id %>">
             <li>Men</li>
           </a>
-          <a href="">
+          <a href="/productfilter/women/userId/<%= user._id %>">
             <li>Women</li>
           </a>
-          <a href="">
-            <li>Collections</li>
-          </a>
-          <a href="">
-            <li>Type</li>
+          <a href="/productfilter/Both/userId/<%= user._id %>">
+            <li>Both</li>
           </a>
         </ul>
+        <% } else { %>
+        <ul class="navlist">
+          <a href="/allproduct">
+            <li>All Products</li>
+          </a>
+          <a href="/productfilter/men">
+            <li>Men</li>
+          </a>
+          <a href="/productfilter/women">
+            <li>Women</li>
+          </a>
+          <a href="/productfilter/Both">
+            <li>Both</li>
+          </a>
+        </ul>
+        <% } %>
         <ul class="iconslist">
-          <li>
-            <form class="d-flex" role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-dark" type="submit">Search</button>
-            </form>
-          </li>
+          <li></li>
           <a href="">
             <li>
               <i class="bi bi-cart-plus"></i>

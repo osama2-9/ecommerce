@@ -1,10 +1,5 @@
 const mongoose = require("mongoose");
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(console.log("connect"))
-  .catch((err) => {
-    console.log(err);
-  });
+
 const productSchema = new mongoose.Schema({
   productName: { type: String },
   quantity: Number,

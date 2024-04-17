@@ -47,7 +47,7 @@
 }
 
 .iconslist li {
-    margin-left: 20px;
+    margin-left: 40px;
     color: black;
     font-size: 25px;
     margin-top: 12px;
@@ -172,6 +172,12 @@ button[type='submit'] {
     position: absolute;
     top: 75%;
     left: 47%;
+}
+
+.btn-outline-dark {
+    position: relative;
+    top: 11px !important;
+    margin-left: 50px;
 }
 
 

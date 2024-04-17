@@ -1,10 +1,4 @@
 const mongoose = require("mongoose");
-mongoose
-  .connect("mongodb://localhost:27017/ecommerce")
-  .then(() => {})
-  .catch((err) => {
-    console.log(err);
-  });
 
 const OrderSchema = new mongoose.Schema(
   {
