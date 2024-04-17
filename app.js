@@ -6,6 +6,7 @@ app.use(methodOverride("_method"));
 const { dbConnect } = require("./models/db");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
